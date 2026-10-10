@@ -1,243 +1,223 @@
-<div align="center">
+# Yunda Fashion — Sistem Monitoring Stok Etalase
 
-# 👗 Yunda Fashion Digital Twin
+Sistem sederhana untuk memantau stok produk pakaian Yunda Fashion. Sistem dirancang untuk mencatat perubahan stok melalui pemindaian QR Code, menampilkan status stok pada dashboard, dan mengirimkan notifikasi WhatsApp ketika diperlukan.
 
-### Monitoring Stok & Etalase Digital Real-Time untuk UMKM
+> **Status proyek:** Dalam pengembangan  
+> **Jenis proyek:** Aplikasi web  
+> **Pengguna utama:** Pengelola stok Yunda Fashion
 
-_Scan QR → stok terupdate → etalase digital berubah warna → alert WhatsApp otomatis._
+## Fitur Utama
 
-![Status](https://img.shields.io/badge/status-in%20development-yellow?style=for-the-badge)
-![Agile](https://img.shields.io/badge/method-Agile%20Scrum-blue?style=for-the-badge)
-![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)
+- Dashboard monitoring stok produk.
+- Indikator status stok:
+  - 🟢 **Hijau:** stok aman.
+  - 🟡 **Kuning:** stok menipis dan perlu diperiksa.
+  - 🔴 **Merah:** stok kritis atau habis.
+- Data produk berdasarkan kategori, warna, ukuran, dan jumlah stok.
+- Pemindaian QR Code melalui kamera HP atau laptop.
+- Pencatatan riwayat perubahan stok.
+- Notifikasi WhatsApp otomatis jika integrasi telah dikonfigurasi.
 
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
-![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white)
-![PHP](https://img.shields.io/badge/PHP-777BB4?style=flat-square&logo=php&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white)
+> **Catatan:** Batas stok untuk status hijau, kuning, dan merah perlu disepakati oleh tim dan ditetapkan pada konfigurasi aplikasi.
 
-[Demo](#️-demo) · [Fitur](#-fitur-utama) · [Instalasi](#-instalasi) · [Cara Kerja](#-cara-kerja) · [Kontribusi](#-alur-kontribusi)
+## Kategori Produk
 
-</div>
+Kategori pakaian yang dicatat dalam sistem:
 
----
+1. Kemeja
+2. Blus
+3. Gamis
+4. Rok
+5. Jeans
+6. Celana Kain
+7. Manset
+8. Legging
 
-## 📖 Tentang Project
+Ukuran produk: **S, M, L, XL**.  
+Warna produk dicatat sesuai variasi yang tersedia di toko.
 
-Project ini dibuat untuk tugas mata kuliah **Manajemen Proyek Perangkat Lunak (MPPL)** dengan studi kasus **Yunda Fashion**, toko pakaian wanita yang menjual Kemeja, Blus, Gamis, Rok, Celana Jeans, Celana Kain, Manset, dan Lejing.
+## Teknologi yang Digunakan
 
-### Masalah yang diselesaikan
+| Bagian | Teknologi | Fungsi |
+|---|---|---|
+| Frontend | HTML, CSS, JavaScript | Tampilan dashboard dan interaksi pengguna |
+| Backend | PHP atau Node.js | Memproses permintaan dan aturan perubahan stok |
+| Database | MySQL melalui XAMPP | Menyimpan data produk dan riwayat stok |
+| QR Scanner | `html5-qrcode` | Membaca QR Code melalui kamera |
+| Notifikasi WhatsApp | `whatsapp-web.js` atau layanan Fonnte | Mengirim notifikasi sesuai konfigurasi |
 
-| # | Masalah | Solusi di sistem ini |
-|---|---------|----------------------|
-| 1 | Data stok tidak akurat karena dicek manual per ukuran dan warna | Setiap varian punya QR Code unik, stok tercatat lewat scan |
-| 2 | Best-seller sering habis tanpa disadari (stockout) | Smart Alert WhatsApp saat stok kritis |
-| 3 | Tidak ada visibilitas etalase secara real-time | Dashboard Digital Twin dengan indikator warna live |
+> Pilih satu teknologi backend utama, PHP **atau** Node.js, agar implementasi dan integrasi lebih konsisten. Periksa dokumentasi dan ketentuan layanan solusi WhatsApp yang dipilih sebelum digunakan.
 
----
+## Pembagian Tugas Tim
 
-## ✨ Fitur Utama
+### Orang 1 — Manajemen Proyek dan Testing
+- Membuat papan Trello atau GitHub Projects dengan kolom **To Do**, **In Progress**, dan **Done**.
+- Menyusun daftar produk beserta warna, ukuran, dan stok awal.
+- Menguji integrasi frontend, backend, database, QR scanner, dan notifikasi.
+- Mencatat bug dan memastikan perbaikan sebelum proyek dinyatakan selesai.
 
-- 🏷️ **QR Generator**: QR Code unik untuk setiap varian (jenis, ukuran, warna).
-- 📷 **Web Scanner**: scan barang masuk/keluar langsung dari kamera HP atau browser, tanpa install aplikasi.
-- 🟩🟨🟥 **Dashboard Digital Twin**: etalase virtual yang warnanya berubah live sesuai kondisi stok.
-- 💬 **Smart Alert WhatsApp**: notifikasi otomatis ke pemilik toko saat stok menyentuh status merah.
-- 🧾 **Riwayat Stok**: log setiap barang masuk dan keluar beserta waktunya.
+### Orang 2 — Frontend
+- Merancang dashboard monitoring stok Yunda Fashion.
+- Menampilkan daftar produk, ukuran, warna, jumlah stok, dan indikator status.
+- Memastikan tampilan responsif pada HP dan laptop.
+- Mengintegrasikan tampilan dengan endpoint backend.
 
-### Indikator Status Stok
+### Orang 3 — Backend dan Database
+- Menyiapkan database MySQL dan tabel produk serta log stok.
+- Membuat API atau endpoint untuk membaca produk dan memperbarui stok.
+- Memvalidasi setiap permintaan pemindaian QR Code.
+- Mencatat perubahan stok ke dalam riwayat transaksi.
+- Mencegah stok menjadi negatif dan menangani permintaan yang tidak valid.
 
-| Warna | Status | Jumlah Stok |
-|:-----:|--------|-------------|
-| 🟢 Hijau | Aman | lebih dari 5 pcs |
-| 🟡 Kuning | Menipis | 2 sampai 5 pcs |
-| 🔴 Merah | Kritis / Habis | kurang dari 2 pcs (memicu alert WhatsApp) |
+### Orang 4 — QR Scanner dan WhatsApp
+- Mengintegrasikan library `html5-qrcode`.
+- Menghubungkan hasil pemindaian QR Code ke backend.
+- Mengintegrasikan notifikasi WhatsApp menggunakan solusi yang dipilih tim.
+- Menguji izin kamera, QR yang tidak valid, dan kegagalan pengiriman pesan.
 
----
+## Alur Kerja Sistem
 
-## 🖼️ Demo
+1. Pengguna membuka dashboard.
+2. Pengguna memindai QR Code pada produk.
+3. Sistem mengirimkan kode produk dan jenis transaksi ke backend.
+4. Backend memvalidasi kode dan transaksi, lalu memperbarui stok di MySQL.
+5. Sistem menyimpan perubahan pada log stok.
+6. Dashboard menampilkan stok terbaru dan indikator status.
+7. Jika aturan notifikasi terpenuhi, sistem mengirimkan pesan WhatsApp.
 
-> Ganti bagian ini dengan screenshot atau GIF aplikasi.
+**Penting:** Pemindaian QR Code saja tidak menentukan apakah stok harus bertambah atau berkurang. Sistem perlu meminta pengguna memilih transaksi **stok masuk** atau **stok keluar**, atau menerapkan alur lain yang disepakati tim. Backend harus memvalidasi transaksi sebelum mengubah stok.
 
-| Dashboard Etalase | Web Scanner | Alert WhatsApp |
-|:-----------------:|:-----------:|:--------------:|
-| ![Dashboard](docs/img/dashboard.png) | ![Scanner](docs/img/scanner.png) | ![Alert](docs/img/alert.png) |
+## Struktur Folder yang Disarankan
 
----
-
-## 🔄 Cara Kerja
-
-```mermaid
-flowchart LR
-    A[👕 Pakaian + Stiker QR] --> B[📷 Scan via HP/Browser]
-    B --> C[⚙️ Backend update stok]
-    C --> D[(🗄️ MySQL)]
-    D --> E[🖥️ Dashboard berubah warna]
-    D --> F{Stok kritis?}
-    F -- Ya --> G[💬 Alert WhatsApp ke pemilik]
-    F -- Tidak --> E
-```
-
----
-
-## 🧰 Tech Stack
-
-| Bagian | Teknologi |
-|--------|-----------|
-| Frontend | HTML5, CSS3, JavaScript, Bootstrap / Tailwind CSS |
-| Backend | PHP / Node.js (Express) |
-| Database | MySQL (XAMPP) |
-| QR Scanner | [html5-qrcode](https://github.com/mebjas/html5-qrcode) |
-| Notifikasi | [whatsapp-web.js](https://github.com/pedroslopez/whatsapp-web.js) / WA Gateway (Fonnte) |
-| Version Control | Git & GitHub |
-
----
-
-## 📁 Struktur Folder
-
-```
-yunda-fashion-digital-twin/
-├── frontend/          # Tampilan dashboard & scanner
+```text
+yunda-fashion/
+├── README.md
+├── frontend/
 │   ├── index.html
-│   ├── scanner.html
 │   ├── css/
+│   │   └── style.css
 │   └── js/
-├── backend/           # API, logika stok, integrasi WhatsApp
-│   ├── routes/
+│       └── app.js
+├── backend/
 │   ├── config/
-│   └── server.js
+│   │   └── database.php
+│   ├── api/
+│   │   ├── products.php
+│   │   └── stock.php
+│   └── services/
+│       └── whatsapp.php
 ├── database/
-│   └── yunda_fashion.sql   # Skema & data awal
-├── docs/              # Dokumentasi & screenshot
-├── .env.example
-└── README.md
+│   └── schema.sql
+├── tests/
+│   └── test-cases.md
+└── docs/
+    └── screenshots/
 ```
 
-> Sesuaikan dengan struktur folder yang sebenarnya dipakai tim.
+Struktur ini merupakan contoh awal. Sesuaikan nama dan isi folder dengan backend yang benar-benar dipilih. Jika tim menggunakan Node.js, sesuaikan ekstensi file dan struktur modulnya.
+
+## Persiapan dan Instalasi
+
+1. Pasang Git dan XAMPP jika tim memilih PHP serta MySQL.
+2. Clone repositori:
+
+   ```bash
+   git clone <URL_REPOSITORY>
+   cd yunda-fashion
+   ```
+
+3. Jalankan Apache dan MySQL melalui XAMPP.
+4. Buat database MySQL, lalu impor file `database/schema.sql` jika sudah tersedia.
+5. Sesuaikan konfigurasi koneksi database pada backend. Jangan memasukkan kata sandi atau token asli ke repositori publik.
+6. Jalankan aplikasi sesuai petunjuk backend yang dipilih.
+7. Buka dashboard melalui alamat lokal yang sesuai.
+8. Izinkan akses kamera ketika menguji QR scanner. Akses kamera biasanya memerlukan HTTPS atau `localhost`.
+9. Uji pengiriman WhatsApp menggunakan konfigurasi uji dan nomor yang telah mendapat persetujuan.
+
+## Rancangan Database
+
+### Tabel `produk`
+
+Kolom yang disarankan:
+
+- `id`
+- `kode_qr`
+- `nama_produk`
+- `kategori`
+- `warna`
+- `ukuran`
+- `stok`
+- `batas_stok_minimum`
+- `created_at`
+- `updated_at`
+
+### Tabel `log_stok`
+
+Kolom yang disarankan:
+
+- `id`
+- `produk_id`
+- `jenis_transaksi` — `masuk` atau `keluar`
+- `jumlah`
+- `stok_sebelum`
+- `stok_sesudah`
+- `waktu_transaksi`
+- `keterangan`
+
+Gunakan foreign key untuk menghubungkan `log_stok.produk_id` dengan `produk.id`. Perubahan stok dan pencatatan log sebaiknya dilakukan dalam satu transaksi database agar datanya tetap konsisten.
+
+## Rencana Pengujian
+
+| No. | Skenario | Hasil yang Diharapkan |
+|---|---|---|
+| 1 | Membuka dashboard | Daftar produk tampil |
+| 2 | Memindai QR produk terdaftar | Produk dikenali |
+| 3 | Memindai QR tidak terdaftar | Sistem menampilkan pesan kesalahan |
+| 4 | Transaksi stok masuk | Stok bertambah sesuai jumlah |
+| 5 | Transaksi stok keluar | Stok berkurang sesuai jumlah |
+| 6 | Stok keluar melebihi stok tersedia | Transaksi ditolak |
+| 7 | Stok melewati batas minimum | Indikator status diperbarui |
+| 8 | Notifikasi memenuhi kondisi | Pesan dikirim atau kegagalan dicatat |
+| 9 | Kamera tidak diizinkan | Sistem menampilkan petunjuk yang sesuai |
+| 10 | Memuat ulang dashboard | Data tetap sesuai database |
+
+## Alur Kolaborasi GitHub
+
+1. Setiap anggota membuat branch sesuai tugas, misalnya `feature/frontend`, `feature/backend`, atau `feature/qr-whatsapp`.
+2. Anggota melakukan commit dengan pesan yang jelas.
+3. Perubahan diajukan melalui Pull Request.
+4. Anggota lain memeriksa perubahan sebelum digabungkan.
+5. Orang 1 menjalankan pengujian integrasi setelah fitur digabungkan.
+6. Bug dicatat sebagai GitHub Issues dan dipindahkan pada papan proyek sesuai status pengerjaan.
+
+## Checklist Pengembangan
+
+- [ ] Papan proyek dibuat
+- [ ] Data produk dan stok awal disiapkan
+- [ ] Dashboard frontend selesai
+- [ ] Database dan backend selesai
+- [ ] QR scanner terintegrasi
+- [ ] Notifikasi WhatsApp terintegrasi
+- [ ] Pengujian integrasi selesai
+- [ ] Dokumentasi dan tangkapan layar diperbarui
+
+## Keamanan dan Catatan
+
+- Jangan menyimpan kata sandi database, API key, token, atau kredensial WhatsApp di GitHub.
+- Validasi data pada backend; jangan hanya mengandalkan validasi frontend.
+- Batasi akses perubahan stok kepada pengguna yang berwenang.
+- Gunakan koneksi aman untuk penggunaan di luar komputer lokal.
+- Patuhi ketentuan layanan WhatsApp dan penyedia notifikasi yang digunakan.
+
+## Anggota Kelompok
+
+| No. | Nama | NIM | Tanggung Jawab |
+|---|---|---|---|
+| 1 | Adit Apriansyah | 230504130 | Manajemen proyek dan testing |
+| 2 | Arya Arfanda | 230504128 | Frontend |
+| 3 | Rana Shofa | 230504106 | Backend dan database |
+| 4 | Salsabila | 230504097 | QR scanner dan notifikasi WhatsApp |
 
 ---
 
-## 🚀 Instalasi
-
-### Prasyarat
-
-- [XAMPP](https://www.apachefriends.org/) (Apache + MySQL)
-- [Node.js](https://nodejs.org/) versi LTS
-- Git
-- Nomor WhatsApp aktif untuk pengirim alert
-
-### Langkah
-
-```bash
-# 1. Clone repository
-git clone https://github.com/<username>/yunda-fashion-digital-twin.git
-cd yunda-fashion-digital-twin
-
-# 2. Install dependency backend
-cd backend
-npm install
-
-# 3. Salin file environment lalu isi sesuai konfigurasi
-cp .env.example .env
-```
-
-**4. Siapkan database**
-
-1. Jalankan **Apache** dan **MySQL** di XAMPP.
-2. Buka `http://localhost/phpmyadmin`.
-3. Buat database baru, misalnya `yunda_fashion`.
-4. Import file `database/yunda_fashion.sql`.
-
-**5. Jalankan aplikasi**
-
-```bash
-npm start
-```
-
-Lalu buka `http://localhost:3000` di browser.
-
-**6. Hubungkan WhatsApp**
-
-Saat pertama dijalankan, scan QR yang muncul di terminal memakai WhatsApp pengirim.
-
-### Contoh `.env`
-
-```env
-DB_HOST=localhost
-DB_USER=root
-DB_PASS=
-DB_NAME=yunda_fashion
-PORT=3000
-OWNER_WA_NUMBER=62812xxxxxxx
-```
-
----
-
-## 🗓️ Roadmap (6 Sprint)
-
-- [ ] **Sprint 1**: Analisis kebutuhan, desain database & wireframe, setup repository
-- [ ] **Sprint 2**: Data master produk & QR Generator
-- [ ] **Sprint 3**: Web Scanner barang masuk/keluar
-- [ ] **Sprint 4**: Dashboard Digital Twin real-time
-- [ ] **Sprint 5**: Smart Alert WhatsApp & integrasi modul
-- [ ] **Sprint 6**: Testing, perbaikan bug, dokumentasi, demo akhir
-
----
-
-## 🤝 Alur Kontribusi
-
-Tim memakai **Git Feature Branching** dan **Pull Request Review**.
-
-```
-main          ← versi stabil
- └── development   ← gabungan pekerjaan berjalan
-      ├── feature/qr-generator
-      ├── feature/web-scanner
-      ├── feature/dashboard-twin
-      └── feature/wa-alert
-```
-
-1. Ambil update terbaru: `git checkout development && git pull`
-2. Buat branch fitur: `git checkout -b feature/nama-fitur`
-3. Commit dengan pesan yang jelas, misalnya `feat: tambah scan barang keluar`
-4. Push, lalu buat **Pull Request** ke `development`
-5. Minimal satu anggota lain me-review sebelum di-merge
-
-### Format Pesan Commit
-
-| Prefix | Fungsi |
-|--------|--------|
-| `feat:` | fitur baru |
-| `fix:` | perbaikan bug |
-| `docs:` | perubahan dokumentasi |
-| `style:` | perubahan tampilan/format kode |
-| `refactor:` | perapian kode tanpa ubah fungsi |
-
----
-
-## 👥 Tim
-
-Dikerjakan bersama oleh 4 orang mahasiswa Informatika dengan semangat saling bantu di setiap tahapan.
-
-| Nama | Peran Utama | GitHub |
-|------|-------------|--------|
-| Arya Arfanda | Anggota Tim | [@username](https://github.com/username) |
-| Nama Anggota 2 | Anggota Tim | [@username](https://github.com/username) |
-| Nama Anggota 3 | Anggota Tim | [@username](https://github.com/username) |
-| Nama Anggota 4 | Anggota Tim | [@username](https://github.com/username) |
-
----
-
-## 📄 Lisensi
-
-Didistribusikan di bawah lisensi **MIT**. Lihat file `LICENSE` untuk detailnya.
-
----
-
-<div align="center">
-
-⭐ Kalau project ini membantu, jangan lupa kasih bintang ya!
-
-_Dibuat untuk tugas MPPL · Universitas Samudra_
-
-</div>
+Proyek ini dikembangkan untuk membantu pencatatan dan pemantauan stok produk Yunda Fashion secara lebih terstruktur.
