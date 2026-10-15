@@ -192,14 +192,3 @@ Sebelum pengembangan paralel, tim perlu menyepakati:
 **Status:** Perencanaan dan pengembangan.
 
 Fitur dan teknologi di atas merupakan rencana awal. Implementasi akhir bergantung pada hasil pengembangan, pengujian, dan evaluasi kebutuhan Yunda Fashion.
-
----
-
-<div align="center">
-
-Dibuat untuk proyek mata kuliah **Manajemen Proyek Perangkat Lunak (MPPL)**.
-
-</div>
-"""
-path.write_text(content, encoding="utf-8")
-print(f"README.md yang diperbarui tersedia di: {path}")
