@@ -1,8 +1,3 @@
-from pathlib import Path
-
-path = Path("/mnt/data/README.md")
-content = """<div align="center">
-
 # DIGITAL TWIN SMART RETAIL
 ### Monitoring Stok Real-Time — Yunda Fashion
 
