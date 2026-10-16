@@ -1,0 +1,27 @@
+# XAMPP / PHP
+*.log
+*.tmp
+*.cache
+
+# Environment / Config sensitif
+.env
+config.php
+database.php
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node (jika ada)
+node_modules/
+npm-debug.log
+
+# Upload folder (opsional, hapus # jika tidak ingin upload)
+# uploads/
