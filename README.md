@@ -1,205 +1,138 @@
+# Digital Twin Smart Retail & Monitoring Stok Real-Time
 
-# DIGITAL TWIN SMART RETAIL
-### Monitoring Stok Real-Time — Yunda Fashion
-
+**Studi Kasus: Yunda Fashion**  
 **Mata Kuliah: Manajemen Proyek Perangkat Lunak (MPPL)**
-
-</div>
-
----
-
-## Tentang Proyek
-
-Proyek ini merupakan aplikasi web untuk membantu UMKM Yunda Fashion mengelola persediaan pakaian berdasarkan model, ukuran, dan warna. Sistem menggunakan konsep **Digital Twin**, yaitu representasi digital kondisi stok toko yang diperbarui berdasarkan transaksi barang masuk dan keluar.
 
 ## Anggota Kelompok
 
-| Nama | NIM | Tanggung Jawab Utama |
-|:---|:---:|:---|
-| **Adit Apriansyah** | `230504130` | Project Manager & Quality Assurance |
-| **Arya Arfanda** | `230504128` | Front-end Developer |
-| **Rana Shofa** | `230504106` | Back-end & Database Developer |
-| **Salsabila** | `230504097` | QR Code & Integration Developer |
+| Nama | NIM |
+|---|---|
+| Adit Apriansyah | 230504130 |
+| Arya Arfanda | 230504128 |
+| Rana Shofa | 230504106 |
+| Salsabila | 230504097 |
 
-## Latar Belakang
+## Deskripsi Proyek
 
-Yunda Fashion menjual berbagai jenis pakaian dengan banyak varian ukuran dan warna. Pencatatan manual dapat menyebabkan perbedaan antara jumlah stok pada catatan dan barang yang tersedia. Selain itu, pemilik berisiko terlambat mengetahui produk yang hampir habis dan belum dapat memantau kondisi stok secara praktis dari luar toko.
+Digital Twin Smart Retail merupakan sistem berbasis website untuk membantu Yunda Fashion memantau persediaan pakaian secara digital. Sistem ini mengelola stok berdasarkan model, ukuran, dan warna, serta menggunakan QR Code untuk mempermudah pencatatan barang masuk dan keluar.
 
-Sistem ini dirancang untuk mencatat perubahan stok secara terstruktur dan menampilkan informasi persediaan melalui satu website.
+Sistem menyediakan dashboard pemantauan stok, tampilan rak digital, riwayat transaksi, serta notifikasi WhatsApp ketika persediaan mencapai batas kritis.
 
 ## Fitur Utama
 
-- **Dashboard:** ringkasan jumlah stok, produk terdaftar, stok menipis, dan stok kritis.
-- **Manajemen produk dan varian:** tambah, lihat, ubah, dan hapus produk serta pengaturan kategori, ukuran, warna, jumlah stok, dan batas stok.
-- **QR Code:** membuat QR Code unik untuk setiap varian produk dan menyiapkannya untuk dicetak.
-- **Transaksi stok:** pemindaian QR Code untuk mencatat barang masuk dan barang keluar.
-- **Riwayat transaksi:** menyimpan waktu transaksi, jenis transaksi, jumlah, varian, dan pengguna yang melakukan transaksi.
-- **Etalase digital:** menampilkan status stok dengan indikator warna.
-- **Smart Alert WhatsApp:** mengirimkan peringatan ketika stok varian mencapai batas kritis.
-- **Autentikasi dan hak akses:** membedakan akses pemilik dan staf toko.
+- **Dashboard:** Menampilkan ringkasan kondisi stok dan informasi persediaan.
+- **Manajemen Produk:** Mengelola data produk berdasarkan model, ukuran, warna, dan jumlah stok.
+- **QR Code:** Menghasilkan QR Code unik untuk setiap varian produk.
+- **Scan Barang Masuk dan Keluar:** Mempermudah pencatatan perubahan stok melalui pemindaian QR Code.
+- **Rak Digital:** Menampilkan status stok dengan indikator warna.
+- **Riwayat Transaksi:** Mencatat aktivitas barang masuk dan keluar.
+- **Notifikasi WhatsApp:** Memberikan peringatan ketika stok mencapai batas kritis.
+- **Autentikasi:** Membatasi akses sistem melalui proses login.
 
-### Indikator Stok
+## Indikator Status Stok
 
-| Warna | Status | Contoh Batas |
-|:---:|:---:|:---|
-| 🟢 | Aman | 10 pcs atau lebih |
-| 🟡 | Menipis | 4–9 pcs |
-| 🔴 | Kritis | 3 pcs atau kurang |
+| Warna | Jumlah Stok | Status |
+|---|---:|---|
+| Hijau | ≥ 10 | Stok aman |
+| Kuning | 4–9 | Stok menipis |
+| Merah | ≤ 3 | Stok kritis |
 
-Batas di atas merupakan nilai contoh dan sebaiknya dapat diatur sesuai kebutuhan toko atau masing-masing produk.
+Batas minimum stok dapat disesuaikan dengan kebutuhan toko.
 
----
+## Teknologi yang Digunakan
 
-## Pembagian Jobdesk Anggota
+- **Frontend:** HTML, CSS, JavaScript
+- **Backend:** Node.js dan Express.js
+- **Database:** MySQL
+- **QR Code Scanner:** html5-qrcode
+- **Real-Time Update:** Socket.IO
+- **Notifikasi WhatsApp:** whatsapp-web.js
+- **Version Control:** Git dan GitHub
+- **Code Editor:** Visual Studio Code
+
+## Pembagian Tugas
 
 ### 1. Adit Apriansyah — Project Manager & Quality Assurance
 
-**Fokus:** pengelolaan proyek, koordinasi, dan pengujian.
+- Mengatur pembagian tugas dan jadwal pengerjaan proyek.
+- Menyusun backlog dan mengelola sprint.
+- Mengatur GitHub Projects, Issues, dan pull request.
+- Melakukan review terhadap perubahan kode.
+- Menyusun skenario pengujian sistem.
+- Mengidentifikasi dan mencatat bug.
+- Memastikan fitur berjalan sesuai kebutuhan.
+- Menyiapkan dokumentasi dan demonstrasi proyek.
 
-**Tugas:**
-- Menyusun product backlog, jadwal, target sprint, dan pembagian pekerjaan.
-- Mengelola GitHub Projects/Issues serta memantau progres setiap anggota.
-- Menetapkan standar kerja bersama, termasuk aturan branch dan commit.
-- Meninjau Pull Request dan membantu koordinasi integrasi antarmodul.
-- Menyusun skenario pengujian untuk fitur-fitur utama.
-- Menguji alur sistem, mencatat bug, memantau perbaikannya, dan menyusun dokumentasi pengujian.
-- Menyiapkan laporan progres dan bahan demonstrasi akhir.
+### 2. Arya Arfanda — Frontend Developer
 
-**Hasil kerja:** backlog dan jadwal proyek, catatan progres, test case, laporan bug, serta dokumentasi proyek.
+- Membuat tampilan utama dan navigasi website.
+- Mengembangkan dashboard pemantauan stok.
+- Membuat antarmuka manajemen produk.
+- Mengembangkan tampilan rak digital.
+- Membuat halaman riwayat transaksi dan notifikasi.
+- Memastikan tampilan responsif.
+- Menghubungkan antarmuka dengan API backend.
+- Menambahkan validasi pada sisi pengguna.
 
-### 2. Arya Arfanda — Front-end Developer
+### 3. Rana Shofa — Backend & Database Developer
 
-**Fokus:** antarmuka dan pengalaman pengguna.
-
-**Tugas:**
-- Membuat layout utama, navigasi, dan dashboard.
-- Membuat halaman manajemen produk dan formulir produk/varian.
-- Membuat tampilan etalase digital beserta indikator warna stok.
-- Membuat halaman riwayat transaksi dan tampilan notifikasi.
-- Membuat antarmuka responsif untuk laptop dan HP.
-- Menghubungkan antarmuka dengan endpoint/API yang disepakati bersama back-end developer.
-- Menangani validasi input dan pesan kesalahan pada sisi antarmuka.
-
-**Hasil kerja:** halaman website, komponen UI, desain responsif, dan integrasi antarmuka dengan API.
-
-### 3. Rana Shofa — Back-end & Database Developer
-
-**Fokus:** penyimpanan data dan logika bisnis.
-
-**Tugas:**
-- Merancang ERD dan skema database MySQL.
-- Menyiapkan tabel pengguna, produk, varian, transaksi stok, dan data pendukung.
-- Membuat autentikasi serta hak akses pemilik dan staf.
-- Mengembangkan proses CRUD produk dan varian.
-- Membuat proses barang masuk dan keluar dengan validasi jumlah stok.
-- Mencegah stok menjadi negatif dan menjaga konsistensi transaksi.
-- Menyediakan API/endpoint untuk dashboard, etalase digital, riwayat transaksi, dan modul QR.
-- Mengatur konfigurasi database serta menyiapkan data awal untuk pengujian.
-
-**Hasil kerja:** ERD, skema database, autentikasi, API, dan logika transaksi stok.
+- Merancang ERD dan struktur database MySQL.
+- Membuat tabel pengguna, produk, varian produk, dan transaksi stok.
+- Mengembangkan autentikasi dan pengaturan hak akses.
+- Membuat API untuk pengelolaan data produk.
+- Mengembangkan logika transaksi barang masuk dan keluar.
+- Memastikan stok tidak menjadi negatif.
+- Menyediakan endpoint untuk integrasi frontend dan QR Code.
+- Menyiapkan data awal untuk pengujian.
 
 ### 4. Salsabila — QR Code & Integration Developer
 
-**Fokus:** pemindaian barang dan integrasi fitur otomatis.
+- Membuat QR Code unik untuk setiap varian produk.
+- Mengembangkan fitur pemindaian menggunakan html5-qrcode.
+- Menghubungkan hasil pemindaian dengan proses barang masuk dan keluar.
+- Mengintegrasikan pemindaian QR Code dengan API stok.
+- Membantu integrasi pembaruan rak digital secara real-time.
+- Mengembangkan notifikasi WhatsApp untuk stok kritis.
+- Menguji QR Code yang tidak valid dan pemindaian berulang.
+- Memastikan proses integrasi berjalan dengan baik.
 
-**Tugas:**
-- Membuat QR Code unik berdasarkan identitas setiap varian produk.
-- Mengembangkan fitur scan QR melalui kamera browser/HP menggunakan `html5-qrcode`.
-- Membuat alur pemilihan mode barang masuk atau barang keluar.
-- Menghubungkan hasil scan dengan API transaksi stok yang dibuat back-end developer.
-- Mengembangkan mekanisme pembaruan etalase digital secara real-time bersama anggota front-end dan back-end.
-- Mengintegrasikan notifikasi WhatsApp untuk stok kritis.
-- Menguji QR tidak valid, pemindaian berulang, kegagalan koneksi, dan kondisi stok kritis.
+## Rencana Pengerjaan (Sprint)
 
-**Hasil kerja:** generator dan pemindai QR, integrasi transaksi, pembaruan real-time, serta integrasi notifikasi.
+| Sprint | Fokus Pengerjaan |
+|---|---|
+| Sprint 1 | Perencanaan, desain sistem, ERD, wireframe, dan persiapan GitHub |
+| Sprint 2 | Manajemen produk dan pembuatan QR Code |
+| Sprint 3 | Pemindaian barang masuk/keluar dan riwayat transaksi |
+| Sprint 4 | Rak digital dan pembaruan stok real-time |
+| Sprint 5 | Integrasi notifikasi WhatsApp |
+| Sprint 6 | Pengujian, perbaikan bug, dokumentasi, dan finalisasi |
 
-> Pembagian di atas menunjukkan penanggung jawab utama. Seluruh anggota tetap berkolaborasi saat integrasi, code review, dan pengujian. Jobdesk dapat disesuaikan setelah kemampuan dan kesepakatan tim dibahas bersama.
+## Alur Kolaborasi GitHub
 
----
+Pengembangan dilakukan secara kolaboratif menggunakan Git dan GitHub.
 
-## Teknologi yang Direncanakan
+- `main`: Menyimpan versi proyek yang stabil.
+- `develop`: Menjadi branch integrasi untuk menggabungkan fitur.
+- `feature/...`: Digunakan setiap anggota untuk mengembangkan fitur masing-masing.
 
-| Komponen | Teknologi |
-|:---|:---|
-| Front-end | HTML, CSS, JavaScript |
-| Back-end | Node.js dan Express.js |
-| Database | MySQL |
-| Scan QR Code | `html5-qrcode` |
-| Pembaruan real-time | Socket.IO (jika diterapkan) |
-| Notifikasi WhatsApp | `whatsapp-web.js` |
-| Version control | Git dan GitHub |
-| Editor | Visual Studio Code |
-
-**Catatan:** `whatsapp-web.js` menggunakan pendekatan tidak resmi dan sesi WhatsApp dapat terputus. Integrasi perlu diuji dan menggunakan akun/nomor yang mendapat izin. Fitur real-time memerlukan mekanisme pembaruan seperti Socket.IO atau pendekatan lain yang disepakati tim.
-
-## Rencana Sprint
-
-| Sprint | Fokus | Target |
-|:---:|:---|:---|
-| **1** | Perencanaan dan desain | Backlog, ERD, wireframe, struktur proyek, dan repository |
-| **2** | Produk dan QR Code | CRUD produk/varian dan generator QR |
-| **3** | Transaksi stok | Scan QR, barang masuk/keluar, dan riwayat transaksi |
-| **4** | Etalase digital | Status stok dan pembaruan tampilan |
-| **5** | Smart Alert | Notifikasi stok kritis |
-| **6** | Pengujian dan finalisasi | Perbaikan bug, dokumentasi, dan demo |
-
-## Alur Kerja GitHub
-
-1. Gunakan `main` untuk versi stabil dan `develop` untuk integrasi fitur.
-2. Setiap anggota membuat branch fitur dari `develop`, misalnya:
-   - `feature/dashboard-ui`
-   - `feature/product-management`
-   - `feature/stock-api`
-   - `feature/qr-scan`
-3. Buat commit dengan pesan yang jelas dan spesifik.
-4. Jika fitur selesai, ajukan Pull Request ke `develop`.
-5. Minta anggota lain meninjau perubahan sebelum merge.
-6. Uji integrasi di `develop`. Gabungkan ke `main` ketika versi dinilai stabil.
+Setiap anggota mengerjakan fitur pada branch masing-masing. Setelah selesai, perubahan diajukan melalui pull request ke branch `develop` untuk diperiksa dan diuji. Versi yang telah stabil kemudian digabungkan ke branch `main`.
 
 ## Kesepakatan Integrasi
 
-Sebelum pengembangan paralel, tim perlu menyepakati:
-- Struktur folder dan cara menjalankan aplikasi.
-- Skema database serta penamaan tabel/kolom.
-- Format data produk dan varian, termasuk ID unik untuk QR Code.
-- Endpoint/API yang digunakan front-end dan modul QR.
-- Aturan perubahan stok dan validasi transaksi.
-- Format respons sukses dan pesan kesalahan.
-- File konfigurasi yang diperlukan; rahasia seperti kata sandi, token, dan kredensial tidak boleh di-commit ke GitHub.
+Sebelum pengembangan dilakukan secara bersamaan, seluruh anggota perlu menyepakati:
 
-## Kebutuhan Non-Fungsional
+- Struktur folder proyek.
+- Struktur database dan penamaan tabel.
+- Format ID produk dan varian untuk QR Code.
+- Endpoint API yang digunakan.
+- Aturan pencatatan stok masuk dan keluar.
+- Format respons dan penanganan kesalahan API.
+- Pengaturan konfigurasi aplikasi dan penyimpanan kredensial.
 
-- Antarmuka mudah dipahami oleh pemilik dan staf toko.
-- Tampilan responsif di laptop dan perangkat seluler.
-- Data stok dan riwayat transaksi konsisten.
-- Halaman hanya dapat diakses sesuai hak pengguna.
-- Perubahan stok tercatat dan dapat ditelusuri.
-- Sistem memberi informasi yang jelas ketika terjadi kesalahan.
+Informasi sensitif seperti kata sandi database, token, dan konfigurasi rahasia tidak boleh diunggah ke repositori publik.
 
-## Manfaat yang Diharapkan
+## Tujuan Proyek
 
-- Mengurangi kesalahan pencatatan stok.
-- Memudahkan pemantauan varian berdasarkan ukuran dan warna.
-- Membantu pemilik mengetahui stok yang menipis atau kritis.
-- Mempercepat pencatatan barang masuk dan keluar.
-- Menyediakan riwayat pergerakan stok untuk membantu keputusan restok.
-- Memberikan pengalaman kerja tim menggunakan Agile Scrum dan GitHub.
+Proyek ini bertujuan membantu Yunda Fashion mengelola persediaan pakaian dengan lebih terstruktur, mempercepat pencatatan barang masuk dan keluar, mempermudah pemantauan stok, serta memberikan peringatan ketika persediaan mulai menipis.
 
----
-
-## Status Proyek
-
-**Status:** Perencanaan dan pengembangan.
-
-Fitur dan teknologi di atas merupakan rencana awal. Implementasi akhir bergantung pada hasil pengembangan, pengujian, dan evaluasi kebutuhan Yunda Fashion.
-
----
-
-<div align="center">
-
-Dibuat untuk proyek mata kuliah **Manajemen Proyek Perangkat Lunak (MPPL)**.
-
-</div>
-"""
-path.write_text(content, encoding="utf-8")
-print(f"README.md yang diperbarui tersedia di: {path}")
+Sistem ini juga menjadi penerapan praktik manajemen proyek perangkat lunak melalui pembagian tugas, pengelolaan sprint, kolaborasi GitHub, integrasi sistem, dan pengujian perangkat lunak.
