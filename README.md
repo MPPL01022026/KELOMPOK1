@@ -63,7 +63,7 @@ Batas minimum stok dapat disesuaikan dengan kebutuhan toko.
 - Memastikan fitur berjalan sesuai kebutuhan.
 - Menyiapkan dokumentasi dan demonstrasi proyek.
 
-### 2. Arya Arfanda — Frontend Developer
+### 2. Rana Shofa — Frontend Developer
 
 - Membuat tampilan utama dan navigasi website.
 - Mengembangkan dashboard pemantauan stok.
@@ -74,7 +74,7 @@ Batas minimum stok dapat disesuaikan dengan kebutuhan toko.
 - Menghubungkan antarmuka dengan API backend.
 - Menambahkan validasi pada sisi pengguna.
 
-### 3. Rana Shofa — Backend & Database Developer
+### 3. Arya Arfanda — Backend & Database Developer
 
 - Merancang ERD dan struktur database MySQL.
 - Membuat tabel pengguna, produk, varian produk, dan transaksi stok.
