@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Tester — Yunda Fashion Backend</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card: #1e293b;
+            --border: #334155;
+            --primary: #7c3aed;
+            --primary-hover: #6d28d9;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            padding: 30px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 900px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+        .header h1 { font-size: 22px; font-weight: 700; }
+        .header p { font-size: 13px; color: var(--text-muted); }
+        .badge-status {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; }
+        }
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .card-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        button {
+            cursor: pointer;
+            border: none;
+            border-radius: 6px;
+            padding: 9px 15px;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: var(--primary-hover); }
+        .btn-secondary { background: #334155; color: var(--text); }
+        .btn-secondary:hover { background: #475569; }
+        .btn-sm { padding: 6px 10px; font-size: 12px; }
+        .input-group {
+            margin-bottom: 12px;
+        }
+        label {
+            display: block;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+        input, select {
+            width: 100%;
+            background: #0f172a;
+            border: 1px solid var(--border);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        pre {
+            background: #0b1120;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: #38bdf8;
+            max-height: 250px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+        .token-box {
+            background: rgba(124, 58, 237, 0.1);
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 11px;
+            font-family: 'JetBrains Mono', monospace;
+            color: #c4b5fd;
+            word-break: break-all;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <div>
+            <h1>🧪 API Tester — Yunda Fashion Inventory</h1>
+            <p>Pengembang: Rana Shofa — Menguji endpoint autentikasi & database live</p>
+        </div>
+        <div class="badge-status" id="healthStatus">● Server: Memeriksa...</div>
+    </div>
+
+    <!-- Token Session Bar -->
+    <div class="card" style="margin-bottom: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <div style="font-size: 13px; font-weight: 600;">🔑 Token JWT Aktif (Tersimpan di Browser):</div>
+            <button class="btn-secondary btn-sm" onclick="clearToken()">Hapus Token (Logout)</button>
+        </div>
+        <div class="token-box" id="tokenDisplay">Belum ada token. Silakan login terlebih dahulu.</div>
+    </div>
+
+    <div class="grid">
+        <!-- Card 1: Form Login -->
+        <div class="card">
+            <div class="card-title">🔐 1. Uji Login (POST /api/auth/login)</div>
+            
+            <div class="btn-group">
+                <button class="btn-secondary btn-sm" onclick="fillAdmin()">Login Cepat: Admin</button>
+                <button class="btn-secondary btn-sm" onclick="fillPetugas()">Login Cepat: Petugas</button>
+            </div>
+
+            <div class="input-group">
+                <label>Username / Email</label>
+                <input type="text" id="loginUsername" value="admin">
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="loginPassword" value="admin123">
+            </div>
+            <button class="btn-primary" onclick="doLogin()" style="width: 100%;">Kirim Request Login</button>
+        </div>
+
+        <!-- Card 2: Uji Token & Profil -->
+        <div class="card">
+            <div class="card-title">👤 2. Uji Token & Profil (GET /api/auth/me)</div>
+            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">
+                Menguji apakah token JWT yang dikirim lewat header <code>Authorization: Bearer &lt;token&gt;</code> dikenali oleh server.
+            </p>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <button class="btn-primary" onclick="getProfile()">Cek Profil Saya</button>
+                <button class="btn-secondary" onclick="getAllUsers()">Lihat Semua User (Khusus Admin)</button>
+            </div>
+        </div>
+
+        <!-- Card 3: Form Tambah Pengguna Baru -->
+        <div class="card">
+            <div class="card-title">➕ 3. Tambah Pengguna Baru (POST /api/auth/register)</div>
+            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 10px;">
+                Memerlukan role <strong>Admin</strong>. Password akan otomatis di-hash dengan <code>bcrypt</code>.
+            </p>
+            <div class="input-group">
+                <label>Nama Lengkap</label>
+                <input type="text" id="regNama" placeholder="Salsabila Rahma">
+            </div>
+            <div class="input-group">
+                <label>Username</label>
+                <input type="text" id="regUsername" placeholder="salsabila">
+            </div>
+            <div class="input-group">
+                <label>Email</label>
+                <input type="email" id="regEmail" placeholder="salsa@yunda.com">
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="regPassword" value="salsa123">
+            </div>
+            <div class="input-group">
+                <label>Role</label>
+                <select id="regRole">
+                    <option value="petugas">Petugas Toko</option>
+                    <option value="admin">Administrator</option>
+                </select>
+            </div>
+            <button class="btn-primary" onclick="doRegister()" style="width: 100%;">Daftarkan Pengguna</button>
+        </div>
+
+        <!-- Card 4: Uji Produk & Dashboard -->
+        <div class="card">
+            <div class="card-title">📦 4. Uji Produk & Dashboard (Tahap 4)</div>
+            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">
+                Melihat data riil produk dari MySQL yang siap dihubungkan ke Frontend Arya.
+            </p>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 15px;">
+                <button class="btn-primary" onclick="getAllProducts()">Semua Produk (GET)</button>
+                <button class="btn-secondary" onclick="getCriticalProducts()">Stok Kritis (≤ 3)</button>
+                <button class="btn-secondary" onclick="getCategories()">Daftar Kategori</button>
+                <button class="btn-primary" style="background: #10b981;" onclick="getDashboardStats()">📊 Ringkasan Dashboard</button>
+            </div>
+            
+            <div style="border-top: 1px solid var(--border); padding-top: 12px; margin-top: 12px;">
+                <div style="font-size: 12px; font-weight: 600; margin-bottom: 8px;">Tambah Produk Baru (POST /api/products)</div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px;">
+                    <input type="text" id="prodKode" placeholder="Kode (e.g. YF-099)" value="YF-099">
+                    <input type="text" id="prodNama" placeholder="Nama Produk" value="Kemeja Flanel Casual">
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px;">
+                    <select id="prodKategori">
+                        <option value="1">1 - Atasan</option>
+                        <option value="2">2 - Bawahan</option>
+                        <option value="3">3 - Dress</option>
+                        <option value="4">4 - Outerwear</option>
+                        <option value="5">5 - Aksesoris</option>
+                    </select>
+                    <input type="text" id="prodRak" placeholder="Lokasi Rak (e.g. Rak A-04)" value="Rak A-04">
+                </div>
+                <button class="btn-primary" onclick="doCreateProduct()" style="width: 100%;">Tambah Produk & Varian (M & L)</button>
+            </div>
+        </div>
+
+        <!-- Card 5: Terminal Response Log -->
+        <div class="card" style="grid-column: 1 / -1;">
+            <div class="card-title">📡 Respon Server (JSON Response)</div>
+            <pre id="responseLog" style="max-height: 380px;">// Hasil respon API akan muncul di sini secara real-time...</pre>
+        </div>
+    </div>
+</div>
+
+<script>
+    let currentToken = localStorage.getItem('yunda_token') || '';
+    updateTokenDisplay();
+    checkHealth();
+
+    function updateTokenDisplay() {
+        const el = document.getElementById('tokenDisplay');
+        if (currentToken) {
+            el.textContent = currentToken;
+            el.style.color = '#38bdf8';
+        } else {
+            el.textContent = 'Belum ada token. Silakan login terlebih dahulu.';
+            el.style.color = '#94a3b8';
+        }
+    }
+
+    function clearToken() {
+        currentToken = '';
+        localStorage.removeItem('yunda_token');
+        updateTokenDisplay();
+        logResponse({ message: 'Token berhasil dihapus dari browser (Logout).' });
+    }
+
+    function logResponse(data) {
+        document.getElementById('responseLog').textContent = JSON.stringify(data, null, 2);
+    }
+
+    async function checkHealth() {
+        try {
+            const res = await fetch('/api/health');
+            const data = await res.json();
+            const el = document.getElementById('healthStatus');
+            if (data.database === 'connected') {
+                el.textContent = '● Server & Database: Terhubung';
+                el.style.color = '#10b981';
+            } else {
+                el.textContent = '● DB Error';
+                el.style.color = '#ef4444';
+            }
+        } catch (e) {
+            document.getElementById('healthStatus').textContent = '● Server: Offline';
+            document.getElementById('healthStatus').style.color = '#ef4444';
+        }
+    }
+
+    function fillAdmin() {
+        document.getElementById('loginUsername').value = 'admin';
+        document.getElementById('loginPassword').value = 'admin123';
+    }
+
+    function fillPetugas() {
+        document.getElementById('loginUsername').value = 'petugas1';
+        document.getElementById('loginPassword').value = 'admin123';
+    }
+
+    async function doLogin() {
+        const username = document.getElementById('loginUsername').value;
+        const password = document.getElementById('loginPassword').value;
+
+        try {
+            const res = await fetch('/api/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            });
+            const data = await res.json();
+            logResponse(data);
+
+            if (data.status === 'success' && data.data.token) {
+                currentToken = data.data.token;
+                localStorage.setItem('yunda_token', currentToken);
+                updateTokenDisplay();
+            }
+        } catch (err) {
+            logResponse({ error: err.message });
+        }
+    }
+
+    async function getProfile() {
+        if (!currentToken) {
+            alert('Silakan login terlebih dahulu untuk mendapatkan token!');
+            return;
+        }
+
+        try {
+            const res = await fetch('/api/auth/me', {
+                headers: { 'Authorization': 'Bearer ' + currentToken }
+            });
+            const data = await res.json();
+            logResponse(data);
+        } catch (err) {
+            logResponse({ error: err.message });
+        }
+    }
+
+    async function getAllUsers() {
+        if (!currentToken) {
+            alert('Silakan login sebagai Admin terlebih dahulu!');
+            return;
+        }
+
+        try {
+            const res = await fetch('/api/auth/users', {
+                headers: { 'Authorization': 'Bearer ' + currentToken }
+            });
+            const data = await res.json();
+            logResponse(data);
+        } catch (err) {
+            logResponse({ error: err.message });
+        }
+    }
+
+    async function doRegister() {
+        if (!currentToken) {
+            alert('Silakan login sebagai Admin terlebih dahulu untuk mendaftarkan user baru!');
+            return;
+        }
+
+        const payload = {
+            nama: document.getElementById('regNama').value,
+            username: document.getElementById('regUsername').value,
+            email: document.getElementById('regEmail').value,
+            password: document.getElementById('regPassword').value,
+            role: document.getElementById('regRole').value
+        };
+
+        try {
+            const res = await fetch('/api/auth/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + currentToken
+                },
+                body: JSON.stringify(payload)
+            });
+            const data = await res.json();
+            logResponse(data);
+        } catch (err) {
+            logResponse({ error: err.message });
+        }
+    }
+
+    async function getAllProducts() {
+        try {
+            const res = await fetch('/api/products');
+            const data = await res.json();
+            logResponse(data);
+        } catch (err) {
+            logResponse({ error: err.message });
+        }
+    }
+
+    async function getCriticalProducts() {
+        try {
+            const res = await fetch('/api/products?status=kritis');
+            const data = await res.json();
+            logResponse(data);
+        } catch (err) {
+            logResponse({ error: err.message });
+        }
+    }
+
+    async function getCategories() {
+        try {
+            const res = await fetch('/api/categories');
+            const data = await res.json();
+            logResponse(data);
+        } catch (err) {
+            logResponse({ error: err.message });
+        }
+    }
+
+    async function getDashboardStats() {
+        try {
+            const res = await fetch('/api/dashboard/stats');
+            const data = await res.json();
+            logResponse(data);
+        } catch (err) {
+            logResponse({ error: err.message });
+        }
+    }
+
+    async function doCreateProduct() {
+        if (!currentToken) {
+            alert('Silakan login terlebih dahulu untuk menambah produk!');
+            return;
+        }
+
+        const kode = document.getElementById('prodKode').value.trim();
+        const nama = document.getElementById('prodNama').value.trim();
+        const katId = document.getElementById('prodKategori').value;
+        const rak = document.getElementById('prodRak').value.trim();
+
+        const payload = {
+            kode_produk: kode,
+            nama_produk: nama,
+            kategori_id: parseInt(katId, 10),
+            deskripsi: 'Produk pakaian kualitas terbaik Yunda Fashion',
+            lokasi_rak: rak,
+            variants: [
+                { ukuran: 'M', warna: 'Hitam', stok: 12, stok_minimum: 3 },
+                { ukuran: 'L', warna: 'Hitam', stok: 2, stok_minimum: 3 }
+            ]
+        };
+
+        try {
+            const res = await fetch('/api/products', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + currentToken
+                },
+                body: JSON.stringify(payload)
+            });
+            const data = await res.json();
+            logResponse(data);
+        } catch (err) {
+            logResponse({ error: err.message });
+        }
+    }
+</script>
+
+</body>
+</html>
