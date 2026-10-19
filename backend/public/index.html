@@ -256,7 +256,51 @@
             </div>
         </div>
 
-        <!-- Card 5: Terminal Response Log -->
+        <!-- Card 5: Uji Scan QR Code (Integrasi Salsabila) -->
+        <div class="card">
+            <div class="card-title">📷 5. Uji Scan QR Code (Integrasi Salsabila)</div>
+            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">
+                Menerima payload hasil scan kamera <code>html5-qrcode</code> dan mengidentifikasi varian produk secara instan.
+            </p>
+            <div class="input-group">
+                <label>Payload QR Code (SKU)</label>
+                <div style="display: flex; gap: 8px;">
+                    <input type="text" id="scanQrInput" value="YF-001-M-PUTIH" placeholder="Contoh: YF-001-M-PUTIH">
+                    <button class="btn-primary" onclick="doScanQR()">Scan</button>
+                </div>
+            </div>
+            <div class="btn-group" style="margin-top: 8px;">
+                <button class="btn-secondary btn-sm" onclick="setQR('YF-001-M-PUTIH')">Kemeja (YF-001)</button>
+                <button class="btn-secondary btn-sm" onclick="setQR('YF-015-32-KHAKI')">Chino (YF-015)</button>
+                <button class="btn-secondary btn-sm" onclick="setQR('YF-023-XL-HITAM')">Kaos (YF-023)</button>
+            </div>
+        </div>
+
+        <!-- Card 6: Uji Mutasi Stok & Anti-Negatif -->
+        <div class="card">
+            <div class="card-title">⚡ 6. Mutasi Stok (Validasi Anti-Negatif)</div>
+            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">
+                Menguji transaksi barang masuk/keluar & membuktikan validasi penolakan stok negatif.
+            </p>
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 8px; margin-bottom: 8px;">
+                <input type="text" id="mutasiSku" value="YF-001-M-PUTIH" placeholder="SKU Varian">
+                <input type="number" id="mutasiQty" value="5" min="1" placeholder="Jumlah">
+            </div>
+            <div class="btn-group" style="margin-bottom: 10px;">
+                <button class="btn-primary" style="background:#10b981;" onclick="doStockIn()">➕ Barang Masuk (Restok)</button>
+                <button class="btn-primary" style="background:#f59e0b;" onclick="doStockOut()">➖ Barang Keluar</button>
+            </div>
+            <div style="border-top: 1px solid var(--border); padding-top: 8px;">
+                <button class="btn-secondary btn-sm" style="color:#ef4444;" onclick="doTestNegativeStock()">
+                    🧪 Tes Penolakan: Kurangi 9999 Barang (Anti-Negatif)
+                </button>
+                <button class="btn-secondary btn-sm" onclick="getStockTransactions()">
+                    📜 Riwayat Mutasi Stok
+                </button>
+            </div>
+        </div>
+
+        <!-- Card 7: Terminal Response Log -->
         <div class="card" style="grid-column: 1 / -1;">
             <div class="card-title">📡 Respon Server (JSON Response)</div>
             <pre id="responseLog" style="max-height: 380px;">// Hasil respon API akan muncul di sini secara real-time...</pre>
@@ -478,6 +522,111 @@
                 },
                 body: JSON.stringify(payload)
             });
+            const data = await res.json();
+            logResponse(data);
+        } catch (err) {
+            logResponse({ error: err.message });
+        }
+    }
+
+    function setQR(val) {
+        document.getElementById('scanQrInput').value = val;
+        document.getElementById('mutasiSku').value = val;
+    }
+
+    async function doScanQR() {
+        const code = document.getElementById('scanQrInput').value.trim();
+        if (!code) {
+            alert('Masukkan kode QR!');
+            return;
+        }
+
+        try {
+            const res = await fetch('/api/variants/scan/' + encodeURIComponent(code));
+            const data = await res.json();
+            logResponse(data);
+        } catch (err) {
+            logResponse({ error: err.message });
+        }
+    }
+
+    async function doStockIn() {
+        if (!currentToken) {
+            alert('Silakan login terlebih dahulu untuk mencatat barang masuk!');
+            return;
+        }
+
+        const sku = document.getElementById('mutasiSku').value.trim();
+        const qty = document.getElementById('mutasiQty').value;
+
+        try {
+            const res = await fetch('/api/stock/in', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + currentToken
+                },
+                body: JSON.stringify({ sku, jumlah: parseInt(qty, 10), keterangan: 'Restok barang toko' })
+            });
+            const data = await res.json();
+            logResponse(data);
+        } catch (err) {
+            logResponse({ error: err.message });
+        }
+    }
+
+    async function doStockOut() {
+        if (!currentToken) {
+            alert('Silakan login terlebih dahulu untuk mencatat barang keluar!');
+            return;
+        }
+
+        const sku = document.getElementById('mutasiSku').value.trim();
+        const qty = document.getElementById('mutasiQty').value;
+
+        try {
+            const res = await fetch('/api/stock/out', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + currentToken
+                },
+                body: JSON.stringify({ sku, jumlah: parseInt(qty, 10), keterangan: 'Penjualan ke pelanggan' })
+            });
+            const data = await res.json();
+            logResponse(data);
+        } catch (err) {
+            logResponse({ error: err.message });
+        }
+    }
+
+    async function doTestNegativeStock() {
+        if (!currentToken) {
+            alert('Silakan login terlebih dahulu!');
+            return;
+        }
+
+        const sku = document.getElementById('mutasiSku').value.trim();
+
+        try {
+            const res = await fetch('/api/stock/out', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + currentToken
+                },
+                body: JSON.stringify({ sku, jumlah: 9999, keterangan: 'Percobaan paksa pengurangan berlebih' })
+            });
+            const data = await res.json();
+            logResponse(data);
+        } catch (err) {
+            logResponse({ error: err.message });
+        }
+    }
+
+    async function getStockTransactions() {
+        try {
+            const res = await fetch('/api/stock/transactions?limit=15');
             const data = await res.json();
             logResponse(data);
         } catch (err) {

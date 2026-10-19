@@ -32,6 +32,8 @@ const authRoutes = require('./routes/authRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 const productRoutes = require('./routes/productRoutes');
 const dashboardRoutes = require('./routes/dashboardRoutes');
+const stockRoutes = require('./routes/stockRoutes');
+const variantRoutes = require('./routes/variantRoutes');
 
 // Endpoint Cek Kesehatan Sistem (Health Check)
 app.get('/api/health', async (req, res) => {
@@ -57,6 +59,8 @@ app.use('/api/auth', authRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/dashboard', dashboardRoutes);
+app.use('/api/stock', stockRoutes);
+app.use('/api/variants', variantRoutes);
 
 // Middleware 404 Route Not Found
 app.use((req, res, next) => {
