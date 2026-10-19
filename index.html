@@ -308,33 +308,79 @@
 
 
             <!-- ============================================================
-                 HALAMAN 2: MANAJEMEN PRODUK (placeholder)
+                 HALAMAN 2: MANAJEMEN PRODUK (Rana Shofa - Frontend)
                  ============================================================ -->
             <div class="page" id="page-products">
+
+                <!-- Page Header -->
                 <div class="page-header">
                     <div class="page-header-left">
                         <h2>Manajemen Produk</h2>
-                        <p>Kelola data produk dan varian pakaian Yunda Fashion</p>
+                        <p>Kelola katalog pakaian, varian ukuran & warna, serta pantau ketersediaan stok fisik</p>
                     </div>
-                    <span class="tag-coming-soon"><i class="fas fa-clock"></i> Segera Hadir</span>
+                    <div class="page-header-actions">
+                        <button class="btn btn-outline btn-sm" onclick="exportProductsCSV()">
+                            <i class="fas fa-file-export"></i> Ekspor CSV
+                        </button>
+                        <button class="btn btn-primary btn-sm" onclick="openAddProductModal()">
+                            <i class="fas fa-plus"></i> Tambah Produk Baru
+                        </button>
+                    </div>
                 </div>
+
+                <!-- Toolbar & Filter -->
+                <div class="toolbar-card">
+                    <div class="toolbar-left">
+                        <div class="search-input-wrap">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="productSearchInput" class="form-control" placeholder="Cari nama, kode, atau rak..." oninput="handleProductSearch()">
+                        </div>
+                        <select id="productCategoryFilter" class="filter-select" onchange="handleProductFilter()">
+                            <option value="">Semua Kategori</option>
+                            <option value="Atasan">Atasan</option>
+                            <option value="Bawahan">Bawahan</option>
+                            <option value="Dress">Dress</option>
+                            <option value="Outerwear">Outerwear</option>
+                            <option value="Aksesoris">Aksesoris</option>
+                        </select>
+                        <select id="productStatusFilter" class="filter-select" onchange="handleProductFilter()">
+                            <option value="">Semua Status Stok</option>
+                            <option value="aman">Aman (≥ 10)</option>
+                            <option value="waspada">Waspada (4–9)</option>
+                            <option value="kritis">Kritis (≤ 3)</option>
+                        </select>
+                    </div>
+                    <div style="font-size: 12.5px; color: var(--text-secondary); font-weight: 500;" id="productCountInfo">
+                        Memuat data produk...
+                    </div>
+                </div>
+
+                <!-- Tabel Produk Card -->
                 <div class="card">
-                    <div class="card-body">
-                        <div class="placeholder-wrapper">
-                            <div class="placeholder-icon-wrap">
-                                <i class="fas fa-box-open"></i>
-                            </div>
-                            <h3>Manajemen Produk</h3>
-                            <p>
-                                Halaman ini akan menampilkan daftar produk dengan fitur tambah, edit, dan hapus,
-                                serta pengelolaan varian produk berdasarkan ukuran dan warna.
-                                Akan diimplementasikan pada <strong>Tahap 2</strong> pengembangan.
-                            </p>
-                            <span class="tag-coming-soon"><i class="fas fa-code"></i> Tahap 2 — Segera Diimplementasikan</span>
+                    <div class="card-body" style="padding: 0;">
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Kode</th>
+                                        <th>Nama Produk</th>
+                                        <th>Kategori</th>
+                                        <th>Lokasi Rak</th>
+                                        <th>Varian (Ukuran / Warna / Stok)</th>
+                                        <th>Total Stok</th>
+                                        <th>Status</th>
+                                        <th style="text-align: right; padding-right: 20px;">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="productsTableBody">
+                                    <!-- Dirender secara dinamis oleh products.js -->
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-            </div>
+
+            </div><!-- /#page-products -->
 
 
             <!-- ============================================================
@@ -461,11 +507,86 @@
     </div><!-- /main-wrapper -->
 </div><!-- /app-wrapper -->
 
+<!-- ===== MODAL TAMBAH / EDIT PRODUK ===== -->
+<div class="modal-overlay" id="productModal">
+    <div class="modal-box">
+        <div class="modal-header">
+            <h3 id="modalTitle"><i class="fas fa-box-open" style="color:var(--accent);"></i> Tambah Produk Baru</h3>
+            <button class="modal-close-btn" onclick="closeProductModal()"><i class="fas fa-times"></i></button>
+        </div>
+        <form id="productForm" onsubmit="handleProductSubmit(event)">
+            <input type="hidden" id="formProductId">
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Kode Produk <span class="required">*</span></label>
+                        <input type="text" id="formKodeProduk" class="form-control" placeholder="Contoh: YF-010" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Kategori <span class="required">*</span></label>
+                        <select id="formKategoriId" class="form-control" required>
+                            <option value="">Pilih Kategori...</option>
+                            <option value="1">Atasan</option>
+                            <option value="2">Bawahan</option>
+                            <option value="3">Dress</option>
+                            <option value="4">Outerwear</option>
+                            <option value="5">Aksesoris</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Nama Produk Pakaian <span class="required">*</span></label>
+                        <input type="text" id="formNamaProduk" class="form-control" placeholder="Contoh: Kemeja Linen Katun" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Lokasi Rak Fisik <span class="required">*</span></label>
+                        <input type="text" id="formLokasiRak" class="form-control" placeholder="Contoh: Rak A-04" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Deskripsi Produk (Opsional)</label>
+                    <textarea id="formDeskripsi" class="form-control" rows="2" placeholder="Keterangan bahan atau model pakaian..."></textarea>
+                </div>
+
+                <!-- Section Varian Produk -->
+                <div class="variants-section">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                        <div>
+                            <span style="font-size:12.5px; font-weight:700; color:var(--text-primary);">Varian Ukuran, Warna, & Stok Awal</span>
+                            <div style="font-size:11px; color:var(--text-secondary);">Tambahkan minimal 1 varian</div>
+                        </div>
+                        <button type="button" class="btn btn-outline btn-sm" onclick="addVariantRow()">
+                            <i class="fas fa-plus"></i> Tambah Baris Varian
+                        </button>
+                    </div>
+
+                    <div id="variantRowsContainer">
+                        <!-- Baris varian dimasukkan di sini via JS -->
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline" onclick="closeProductModal()">Batal</button>
+                <button type="submit" class="btn btn-primary" id="btnSaveProduct">
+                    <i class="fas fa-save"></i> Simpan Produk
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ===== TOAST CONTAINER ===== -->
+<div class="toast-container" id="toastContainer"></div>
+
 <!-- ===== SCRIPTS ===== -->
-<!-- Urutan penting: data.js → app.js → dashboard.js -->
+<!-- Urutan penting: data.js → app.js → dashboard.js → products.js -->
 <script src="assets/js/data.js"></script>
 <script src="assets/js/app.js"></script>
 <script src="assets/js/dashboard.js"></script>
+<script src="assets/js/products.js"></script>
 
 </body>
 </html>
