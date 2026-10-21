@@ -1,138 +1,327 @@
-# Digital Twin Smart Retail & Monitoring Stok Real-Time
+# 👗 Yunda Fashion POS & Inventory Monitoring System
+### *Sistem Kasir & Monitoring Stok Berbasis Web dengan Konsep Digital Twin*
 
-**Studi Kasus: Yunda Fashion**  
-**Mata Kuliah: Manajemen Proyek Perangkat Lunak (MPPL)**
+<p align="center">
+  <img src="https://img.shields.io/badge/Platform-Web-blue?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Platform Web" />
+  <img src="https://img.shields.io/badge/Language-PHP%208.2-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP 8.2" />
+  <img src="https://img.shields.io/badge/Database-MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL" />
+  <img src="https://img.shields.io/badge/Framework-Bootstrap%205-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white" alt="Bootstrap" />
+  <img src="https://img.shields.io/badge/Methodology-Agile%20Scrum-success?style=for-the-badge&logo=scrumalliance&logoColor=white" alt="Agile Scrum" />
+  <img src="https://img.shields.io/badge/Status-Active%20Development-orange?style=for-the-badge" alt="Status" />
+</p>
 
-## Anggota Kelompok
+---
 
-| Nama | NIM |
-|---|---|
-| Adit Apriansyah | 230504130 |
-| Arya Arfanda | 230504128 |
-| Rana Shofa | 230504106 |
-| Salsabila | 230504097 |
+## 📌 Informasi Proyek
 
-## Deskripsi Proyek
+* **Mata Kuliah:** Manajemen Proyek Perangkat Lunak (MPPL)
+* **Studi Kasus:** UMKM Toko Pakaian Wanita **Yunda Fashion**
+* **Kelompok:** 1 (Satu)
+* **Metode Pengembangan:** Agile Scrum
+* **Versi Dokumen PRD:** 1.0 (Rancangan Awal)
+* **Repository:** [https://github.com/MPPL01022026/KELOMPOK1](https://github.com/MPPL01022026/KELOMPOK1)
 
-Digital Twin Smart Retail merupakan sistem berbasis website untuk membantu Yunda Fashion memantau persediaan pakaian secara digital. Sistem ini mengelola stok berdasarkan model, ukuran, dan warna, serta menggunakan QR Code untuk mempermudah pencatatan barang masuk dan keluar.
+---
 
-Sistem menyediakan dashboard pemantauan stok, tampilan rak digital, riwayat transaksi, serta notifikasi WhatsApp ketika persediaan mencapai batas kritis.
+## 👥 Identitas & Pembagian Peran Kelompok
 
-## Fitur Utama
+| No | Foto / Inisial | Nama Anggota | NIM | Peran (Role) | Tanggung Jawab Utama |
+|:--:|:---:|:---|:---:|:---|:---|
+| 1 | 👑 | **Adit Apriansyah** | `230504130` | **Project Manager & Database Developer** | Backlog, Sprint Planning, GitHub Projects, ERD, Skema MySQL, Database Transactions |
+| 2 | 💻 | **Arya Arfanda** | `230504128` | **Backend Developer & POS** | Autentikasi, Logika Transaksi POS, Perhitungan Kembalian, Pengurangan Stok Otomatis |
+| 3 | 🎨 | **Rana Shofa** | `230504106` | **Frontend Developer & UI/UX Designer** | Wireframe, Tampilan Antarmuka Responsif, POS View, Keranjang, Dashboard, Desain Struk |
+| 4 | 📦 | **Salsabila** | `230504097` | **Inventory & Reporting Developer / QA** | CRUD Produk & Kategori, Manajemen Varian, Barang Masuk, Etalase Digital, Laporan & Testing |
 
-- **Dashboard:** Menampilkan ringkasan kondisi stok dan informasi persediaan.
-- **Manajemen Produk:** Mengelola data produk berdasarkan model, ukuran, warna, dan jumlah stok.
-- **QR Code:** Menghasilkan QR Code unik untuk setiap varian produk.
-- **Scan Barang Masuk dan Keluar:** Mempermudah pencatatan perubahan stok melalui pemindaian QR Code.
-- **Rak Digital:** Menampilkan status stok dengan indikator warna.
-- **Riwayat Transaksi:** Mencatat aktivitas barang masuk dan keluar.
-- **Notifikasi WhatsApp:** Memberikan peringatan ketika stok mencapai batas kritis.
-- **Autentikasi:** Membatasi akses sistem melalui proses login.
+---
 
-## Indikator Status Stok
+## 📖 Latar Belakang & Deskripsi Produk
 
-| Warna | Jumlah Stok | Status |
-|---|---:|---|
-| Hijau | ≥ 10 | Stok aman |
-| Kuning | 4–9 | Stok menipis |
-| Merah | ≤ 3 | Stok kritis |
+**Yunda Fashion** merupakan usaha mikro, kecil, dan menengah (UMKM) yang bergerak dalam penjualan pakaian wanita dengan variasi produk seperti *kemeja, blus, gamis, rok, celana jeans, celana kain, manset, dan legging*.
 
-Batas minimum stok dapat disesuaikan dengan kebutuhan toko.
+Setiap pakaian memiliki kombinasi variasi **ukuran (size)** dan **warna (color)** yang beragam. Sistem pencatatan manual seringkali menimbulkan kendala:
+1. Ketidaksesuaian jumlah stok fisik dengan catatan pembukuan.
+2. Keterlambatan mengetahui persediaan produk yang mendekati habis.
+3. Pemilik toko harus datang langsung ke lokasi fisik untuk memeriksa ketersediaan barang.
 
-## Teknologi yang Digunakan
+### 💡 Solusi yang Diterapkan:
+Aplikasi kasir (POS) terintegrasi dengan persediaan berbasis web yang mengadopsi konsep **Digital Twin**:
+* **Transaksi Kasir Cepat Tanpa Barcode / QR Code:** Kasir cukup mencari nama/kategori produk, memilih varian ukuran & warna, dan memasukkan jumlah barang.
+* **Pengurangan Stok Otomatis:** Setiap transaksi yang berhasil langsung memotong stok pada tabel varian dan mencatat mutasi stok (*stock movement*).
+* **Konsep Digital Twin:** Representasi digital toko fisik yang mencerminkan kondisi persediaan nyata melalui **Etalase Digital** dan **Dashboard Monitoring Real-Time** (didukung polling otomatis).
 
-- **Frontend:** HTML, CSS, JavaScript
-- **Backend:** Node.js dan Express.js
-- **Database:** MySQL
-- **QR Code Scanner:** html5-qrcode
-- **Real-Time Update:** Socket.IO
-- **Notifikasi WhatsApp:** whatsapp-web.js
-- **Version Control:** Git dan GitHub
-- **Code Editor:** Visual Studio Code
+---
 
-## Pembagian Tugas
+## 🪞 Penerapan Konsep Digital Twin
 
-### 1. Adit Apriansyah — Project Manager & Quality Assurance
+Dalam sistem ini, setiap entitas produk fisik di toko Yunda Fashion memiliki salinan digital dinamis yang mencatat:
+* 🏷️ **Identitas Produk:** Nama, Kategori, Foto, dan Harga Jual.
+* 📏 **Karakteristik Varian:** Ukuran (*S, M, L, XL, No. Celana*) & Warna.
+* 📊 **Kondisi Persediaan Real-Time:** Kuantitas stok aktif dan batas minimum (*min_stock*).
+* 🚦 **Status Representasi Fisik:** Indikator visual tingkat persediaan.
 
-- Mengatur pembagian tugas dan jadwal pengerjaan proyek.
-- Menyusun backlog dan mengelola sprint.
-- Mengatur GitHub Projects, Issues, dan pull request.
-- Melakukan review terhadap perubahan kode.
-- Menyusun skenario pengujian sistem.
-- Mengidentifikasi dan mencatat bug.
-- Memastikan fitur berjalan sesuai kebutuhan.
-- Menyiapkan dokumentasi dan demonstrasi proyek.
+### 🚦 Indikator Status Persediaan
 
-### 2. Rana Shofa — Frontend Developer
+| Status Persediaan | Indikator Visual | Rentang Stok | Tindakan Sistem |
+|:---|:---:|:---:|:---|
+| **Aman** | 🟢 Hijau | $\ge 10$ pcs | Persediaan tersedia dan aman untuk operasional |
+| **Menipis** | 🟡 Kuning | $4 - 9$ pcs | Peringatan persiapan pemesanan restok ke supplier |
+| **Kritis** | 🔴 Merah | $\le 3$ pcs | Peringatan prioritas tinggi di dashboard & etalase |
 
-- Membuat tampilan utama dan navigasi website.
-- Mengembangkan dashboard pemantauan stok.
-- Membuat antarmuka manajemen produk.
-- Mengembangkan tampilan rak digital.
-- Membuat halaman riwayat transaksi dan notifikasi.
-- Memastikan tampilan responsif.
-- Menghubungkan antarmuka dengan API backend.
-- Menambahkan validasi pada sisi pengguna.
+*(Ambang batas default dapat disesuaikan per varian produk pada kolom `min_stock`)*
 
-### 3. Arya Arfanda — Backend & Database Developer
+---
 
-- Merancang ERD dan struktur database MySQL.
-- Membuat tabel pengguna, produk, varian produk, dan transaksi stok.
-- Mengembangkan autentikasi dan pengaturan hak akses.
-- Membuat API untuk pengelolaan data produk.
-- Mengembangkan logika transaksi barang masuk dan keluar.
-- Memastikan stok tidak menjadi negatif.
-- Menyediakan endpoint untuk integrasi frontend dan QR Code.
-- Menyiapkan data awal untuk pengujian.
+## ⚙️ Fitur Utama Sistem
 
-### 4. Salsabila — QR Code & Integration Developer
+```
+┌──────────────────────────────────────────────────────────────────────────┐
+│                   YUNDA FASHION POS & DIGITAL TWIN                       │
+├──────────────────────────────────────────────────────────────────────────┤
+│                                                                          │
+│  [🔐 Autentikasi]       Multi-role login (Admin & Kasir)                │
+│  [📊 Dashboard]          Omzet hari ini, stok kritis, grafik tren        │
+│  [👗 Produk & Varian]    Katalog bertingkat (Produk -> Ukuran & Warna)   │
+│  [🛒 Kasir (POS)]        Cari nama/kategori, tanpa scanner barcode       │
+│  [💰 Pembayaran]         Hitung total & kembalian, cetak struk nota     │
+│  [📦 Manajemen Stok]     Pencatatan barang masuk & penyesuaian fisik     │
+│  [🏪 Etalase Digital]    Tampilan rak digital twin dengan status warna  │
+│  [📈 Laporan Penjualan]  Filter rentang tanggal, produk terlaris, cetak  │
+│                                                                          │
+└──────────────────────────────────────────────────────────────────────────┘
+```
 
-- Membuat QR Code unik untuk setiap varian produk.
-- Mengembangkan fitur pemindaian menggunakan html5-qrcode.
-- Menghubungkan hasil pemindaian dengan proses barang masuk dan keluar.
-- Mengintegrasikan pemindaian QR Code dengan API stok.
-- Membantu integrasi pembaruan rak digital secara real-time.
-- Mengembangkan notifikasi WhatsApp untuk stok kritis.
-- Menguji QR Code yang tidak valid dan pemindaian berulang.
-- Memastikan proses integrasi berjalan dengan baik.
+### 1. 🔐 Autentikasi & Hak Akses (Role-Based Access Control)
+* **Admin / Pemilik Toko:** Akses menyeluruh ke Dashboard, Manajemen Produk, Stok Masuk/Penyesuaian, Laporan Penjualan, Manajemen Kasir, dan Etalase Digital.
+* **Kasir:** Akses fokus operasional ke Antarmuka Kasir (POS), Riwayat Transaksi pribadi, dan Etalase Digital untuk mengecek ketersediaan stok pelanggan.
 
-## Rencana Pengerjaan (Sprint)
+### 2. 🛒 Point of Sale (POS) Kasir Cerdas
+* Navigasi produk cepat dengan filter kategori instan (*pills*) dan kolom pencarian.
+* Pemilihan varian (ukuran & warna) beserta info stok tersedia secara langsung.
+* Keranjang belanja dinamis dengan tombol kontrol kuantitas.
+* Validasi pembayaran tunai, kalkulasi kembalian akurat, serta nomor invoice otomatis (`INV-YYYYMMDD-XXXX`).
+* Cetak struk pembayaran thermal 80mm yang rapi dan siap pakai.
 
-| Sprint | Fokus Pengerjaan |
-|---|---|
-| Sprint 1 | Perencanaan, desain sistem, ERD, wireframe, dan persiapan GitHub |
-| Sprint 2 | Manajemen produk dan pembuatan QR Code |
-| Sprint 3 | Pemindaian barang masuk/keluar dan riwayat transaksi |
-| Sprint 4 | Rak digital dan pembaruan stok real-time |
-| Sprint 5 | Integrasi notifikasi WhatsApp |
-| Sprint 6 | Pengujian, perbaikan bug, dokumentasi, dan finalisasi |
+### 3. 📦 Pengurangan Stok Otomatis & Konsistensi Data
+* Menggunakan **MySQL Database Transactions** (`BEGIN`, `COMMIT`, `ROLLBACK`) untuk menjamin konsistensi data penjualan dan stok.
+* Validasi pencegahan stok negatif: Transaksi akan ditolak jika kuantitas melebihi persediaan.
+* Audit trail lengkap melalui tabel `stock_movements` (mencatat *stock_before*, *stock_after*, *movement_type*, *reference_id*, dan kasir yang bertugas).
 
-## Alur Kolaborasi GitHub
+### 4. 🏪 Etalase Digital Twin
+* Representasi digital dari rak display toko fisik Yunda Fashion.
+* Memuat kartu produk interaktif dengan penanda status stok berwarna (Hijau, Kuning, Merah).
+* Mendukung fitur *auto-refresh / polling* berkala agar data etalase selalu sinkron dengan transaksi kasir.
 
-Pengembangan dilakukan secara kolaboratif menggunakan Git dan GitHub.
+### 5. 📈 Laporan Penjualan & Analitik
+* Ringkasan total pendapatan, total transaksi, dan total produk terjual.
+* Grafik performa penjualan mingguan.
+* Filter laporan berdasarkan rentang tanggal tertentu.
+* Daftar 5 produk terlaris (*Top Selling Products*).
+* Ekspor & cetak laporan penjualan resmi.
 
-- `main`: Menyimpan versi proyek yang stabil.
-- `develop`: Menjadi branch integrasi untuk menggabungkan fitur.
-- `feature/...`: Digunakan setiap anggota untuk mengembangkan fitur masing-masing.
+---
 
-Setiap anggota mengerjakan fitur pada branch masing-masing. Setelah selesai, perubahan diajukan melalui pull request ke branch `develop` untuk diperiksa dan diuji. Versi yang telah stabil kemudian digabungkan ke branch `main`.
+## 🗄️ Arsitektur Basis Data (Database Schema)
 
-## Kesepakatan Integrasi
+Sistem menggunakan 7 tabel relasional ternormalisasi:
 
-Sebelum pengembangan dilakukan secara bersamaan, seluruh anggota perlu menyepakati:
+```mermaid
+erDiagram
+    USERS ||--o{ SALES : "memproses"
+    USERS ||--o{ STOCK_MOVEMENTS : "mencatat"
+    CATEGORIES ||--o{ PRODUCTS : "mengelompokkan"
+    PRODUCTS ||--o{ PRODUCT_VARIANTS : "memiliki"
+    PRODUCT_VARIANTS ||--o{ SALE_ITEMS : "dijual_dalam"
+    PRODUCT_VARIANTS ||--o{ STOCK_MOVEMENTS : "mengalami_perubahan"
+    SALES ||--o{ SALE_ITEMS : "terdiri_atas"
 
-- Struktur folder proyek.
-- Struktur database dan penamaan tabel.
-- Format ID produk dan varian untuk QR Code.
-- Endpoint API yang digunakan.
-- Aturan pencatatan stok masuk dan keluar.
-- Format respons dan penanganan kesalahan API.
-- Pengaturan konfigurasi aplikasi dan penyimpanan kredensial.
+    USERS {
+        int id PK
+        string name
+        string username UK
+        string email UK
+        string password
+        enum role "admin, kasir"
+        boolean is_active
+        timestamp created_at
+    }
 
-Informasi sensitif seperti kata sandi database, token, dan konfigurasi rahasia tidak boleh diunggah ke repositori publik.
+    CATEGORIES {
+        int id PK
+        string category_name
+        timestamp created_at
+    }
 
-## Tujuan Proyek
+    PRODUCTS {
+        int id PK
+        int category_id FK
+        string product_name
+        text description
+        string image
+        decimal price
+        enum status "active, inactive"
+        timestamp created_at
+    }
 
-Proyek ini bertujuan membantu Yunda Fashion mengelola persediaan pakaian dengan lebih terstruktur, mempercepat pencatatan barang masuk dan keluar, mempermudah pemantauan stok, serta memberikan peringatan ketika persediaan mulai menipis.
+    PRODUCT_VARIANTS {
+        int id PK
+        int product_id FK
+        string size
+        string color
+        int stock
+        int min_stock
+    }
 
-Sistem ini juga menjadi penerapan praktik manajemen proyek perangkat lunak melalui pembagian tugas, pengelolaan sprint, kolaborasi GitHub, integrasi sistem, dan pengujian perangkat lunak.
+    SALES {
+        int id PK
+        string invoice_number UK
+        int user_id FK
+        decimal total_amount
+        decimal paid_amount
+        decimal change_amount
+        enum payment_method "cash"
+        timestamp created_at
+    }
+
+    SALE_ITEMS {
+        int id PK
+        int sale_id FK
+        int variant_id FK
+        int quantity
+        decimal unit_price
+        decimal subtotal
+    }
+
+    STOCK_MOVEMENTS {
+        int id PK
+        int variant_id FK
+        int user_id FK
+        enum movement_type "sale, restock, adjustment"
+        int quantity
+        int stock_before
+        int stock_after
+        string reference_type
+        int reference_id
+        timestamp created_at
+    }
+```
+
+---
+
+## 🛠️ Tumpukan Teknologi (Tech Stack)
+
+| Komponen | Teknologi | Keterangan |
+|:---|:---|:---|
+| **Frontend** | HTML5, CSS3, JavaScript (ES6+) | Antarmuka dinamis, modular, dan ringan |
+| **CSS Framework** | Bootstrap 5 + Custom Design Tokens | Tampilan modern bernuansa *Plus Jakarta Sans* |
+| **Backend** | PHP 8.2 (Native MVC Modular) | Pemrosesan logika bisnis & transaksi aman |
+| **Database** | MySQL 8.0 / MariaDB | Relasional dengan ACID compliance & Foreign Key |
+| **Web Server** | Apache (XAMPP Environment) | Lingkungan pengujian server lokal |
+| **Version Control** | Git & GitHub | Manajemen kode dan branch kolaboratif |
+| **Project Board** | GitHub Projects & Issues | Manajemen alur kerja Kanban Scrum |
+
+---
+
+## 🏃 Rencana Pengerjaan (Sprint Roadmap)
+
+Metode pengembangan menggunakan **Agile Scrum** dengan total 6 sprint:
+
+```
+Sprint 1 [Perencanaan & Desain] ────► Sprint 2 [Fondasi & Produk] ────► Sprint 3 [Sistem Kasir (POS)]
+          │                                     │                                  │
+          ▼                                     ▼                                  ▼
+Sprint 6 [Testing & Finalisasi] ◄─── Sprint 5 [Dashboard & Laporan] ◄─── Sprint 4 [Stok & Digital Twin]
+```
+
+* **Sprint 1 (Perencanaan & Perancangan):** Penyusunan PRD, Product Backlog, GitHub Projects, ERD, dan skema database MySQL.
+* **Sprint 2 (Pengembangan Fondasi Sistem):** Sistem autentikasi, manajemen hak akses, serta CRUD kategori, produk, dan varian.
+* **Sprint 3 (Pengembangan Sistem Kasir):** Logika POS, pencarian produk, keranjang belanja, kalkulasi pembayaran tunai, dan cetak struk.
+* **Sprint 4 (Monitoring Stok & Digital Twin):** Pengurangan stok otomatis atomik, modul barang masuk, penyesuaian stok, serta etalase digital twin real-time.
+* **Sprint 5 (Dashboard & Pelaporan):** Dashboard ringkasan analitik, peringatan stok kritis, grafik penjualan, dan laporan berkala.
+* **Sprint 6 (Testing & Finalisasi):** Black-box testing menyeluruh, penanganan konkurensi data stok, perbaikan bug, dan dokumentasi akhir.
+
+---
+
+## 🌿 Alur Kolaborasi Git & GitHub
+
+Sistem branch terstruktur untuk menjamin kestabilan kode:
+
+```
+main          ──────────────────────────────────────────● (Production / Stable Demo)
+                 ▲                                       ▲
+develop       ───┴────────●───────────────────●──────────┴── (Integration Branch)
+                           ▲                 ▲
+feature/*                  ├── feature/database
+                           ├── feature/auth-pos
+                           ├── feature/frontend
+                           └── feature/inventory-report
+```
+
+1. **`main`**: Kode stabil yang siap dipresentasikan atau didemonstrasikan.
+2. **`develop`**: Branch integrasi utama tempat semua fitur digabungkan dan diuji bersama.
+3. **`feature/...`**: Branch pengerjaan modul mandiri oleh masing-masing PIC sesuai jobdesk.
+
+---
+
+## 🚀 Panduan Instalasi & Menjalankan Sistem
+
+### 1. Prasyarat Sistem
+* [XAMPP](https://www.apachefriends.org/) (PHP $\ge 8.1$ dan MySQL)
+* Browser modern (Chrome, Edge, Firefox)
+* Git CLI
+
+### 2. Langkah Pemasangan
+1. **Clone repository ke folder `htdocs` XAMPP:**
+   ```bash
+   cd C:\xampp\htdocs
+   git clone https://github.com/MPPL01022026/KELOMPOK1.git Yundafashion
+   cd Yundafashion
+   ```
+
+2. **Jalankan Apache & MySQL** melalui XAMPP Control Panel.
+
+3. **Import Database:**
+   * Buka browser dan akses `http://localhost/phpmyadmin`
+   * Buat database baru bernama `yundafashion`
+   * Import file SQL yang tersedia di:
+     ```
+     database/yundafashion.sql
+     ```
+   * *Atau gunakan command line:*
+     ```bash
+     mysql -u root -p yundafashion < database/yundafashion.sql
+     ```
+
+4. **Konfigurasi Koneksi (Opsional):**
+   * Periksa file `config/database.php` jika menggunakan user/password MySQL yang berbeda (default: user `root` tanpa password).
+
+5. **Akses Aplikasi:**
+   * Buka browser di URL: `http://localhost/Yundafashion/auth/login.php`
+
+### 🔑 Kredensial Default (Demo Akun)
+
+| Peran | Username | Password | Hak Akses |
+|:---|:---:|:---:|:---|
+| **Admin** | `admin` | `admin123` | Akses Penuh (Dashboard, Produk, Stok, Laporan, Kasir, Pengguna) |
+| **Kasir** | `kasir1` | `admin123` | Akses Kasir (Transaksi Penjualan, Riwayat Kasir, Etalase Digital) |
+
+---
+
+## 🧪 Skenario Pengujian Utama (Black Box Testing)
+
+| ID Tes | Skenario Pengujian | Hasil yang Diharapkan | Status |
+|:---:|:---|:---|:---:|
+| `TC-01` | Login dengan akun terdaftar | Berhasil masuk sesuai halaman peran masing-masing | ✅ Lolos |
+| `TC-02` | Login dengan password salah | Sistem menolak & menampilkan pesan error validasi | ✅ Lolos |
+| `TC-03` | Tambah produk & varian baru | Data produk dan varian ukuran/warna tersimpan di DB | ✅ Lolos |
+| `TC-04` | Pencarian produk manual di POS | Produk muncul tanpa perlu menggunakan barcode/QR | ✅ Lolos |
+| `TC-05` | Transaksi penjualan berhasil | Stok varian berkurang otomatis & invoice tercatat | ✅ Lolos |
+| `TC-06` | Pembelian melebihi kuantitas stok | Transaksi dicegah dengan notifikasi stok tidak cukup | ✅ Lolos |
+| `TC-07` | Input stok barang masuk (*restock*) | Jumlah stok bertambah dan tercatat di *stock movements* | ✅ Lolos |
+| `TC-08` | Perubahan status etalase digital | Indikator warna otomatis berubah (Hijau/Kuning/Merah) | ✅ Lolos |
+
+---
+
+<p align="center">
+  <b>Yunda Fashion POS & Inventory Monitoring System</b><br>
+  Dikembangkan dengan ❤️ oleh <b>Kelompok 1 — MPPL 2026</b>
+</p>
