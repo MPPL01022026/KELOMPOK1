@@ -26,7 +26,7 @@
 ## 👥 Identitas & Pembagian Peran Kelompok
 
 | No | Foto / Inisial | Nama Anggota | NIM | Peran (Role) |
-|:--:|:---:|:---|:---:|:---|:---|
+|:--:|:---:|:---|:---:|:---|
 | 1 | 👑 | **Adit Apriansyah** | `230504130` | **Project Manager & Database Developer** |
 | 2 | 💻 | **Arya Arfanda** | `230504128` | **Backend Developer & POS** |
 | 3 | 🎨 | **Rana Shofa** | `230504106` | **Frontend Developer & UI/UX Designer** |
