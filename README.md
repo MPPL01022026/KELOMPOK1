@@ -25,13 +25,12 @@
 
 ## 👥 Identitas & Pembagian Peran Kelompok
 
-| No | Foto / Inisial | Nama Anggota | NIM | Peran (Role) | Tanggung Jawab Utama |
+| No | Foto / Inisial | Nama Anggota | NIM | Peran (Role) |
 |:--:|:---:|:---|:---:|:---|:---|
-| 1 | 👑 | **Adit Apriansyah** | `230504130` | **Project Manager & Database Developer** | Backlog, Sprint Planning, GitHub Projects, ERD, Skema MySQL, Database Transactions |
-| 2 | 💻 | **Arya Arfanda** | `230504128` | **Backend Developer & POS** | Autentikasi, Logika Transaksi POS, Perhitungan Kembalian, Pengurangan Stok Otomatis |
-| 3 | 🎨 | **Rana Shofa** | `230504106` | **Frontend Developer & UI/UX Designer** | Wireframe, Tampilan Antarmuka Responsif, POS View, Keranjang, Dashboard, Desain Struk |
-| 4 | 📦 | **Salsabila** | `230504097` | **Inventory & Reporting Developer / QA** | CRUD Produk & Kategori, Manajemen Varian, Barang Masuk, Etalase Digital, Laporan & Testing |
-
+| 1 | 👑 | **Adit Apriansyah** | `230504130` | **Project Manager & Database Developer** |
+| 2 | 💻 | **Arya Arfanda** | `230504128` | **Backend Developer & POS** |
+| 3 | 🎨 | **Rana Shofa** | `230504106` | **Frontend Developer & UI/UX Designer** |
+| 4 | 📦 | **Salsabila** | `230504097` | **Inventory & Reporting Developer / QA** |
 ---
 
 ## 📖 Latar Belakang & Deskripsi Produk
