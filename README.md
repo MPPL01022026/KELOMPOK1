@@ -20,7 +20,7 @@
 * **Metode Pengembangan:** Agile Scrum
 * **Versi Dokumen PRD:** 1.0 (Rancangan Awal)
 * **Repository:** [https://github.com/MPPL01022026/KELOMPOK1](https://github.com/MPPL01022026/KELOMPOK1)
-* **Link Canva** https://canva.link/99q2mcmf4fr5mbi
+* **Link Canva** https://canva.link/dbx5176vjgnn57c
 
 ---
 
