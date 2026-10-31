@@ -1,0 +1,11 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /yundafashion/
+
+    # Jangan rewrite jika file atau folder fisik ada (seperti file css, js, uploads)
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    # Arahkan semua request lainnya ke index.php
+    RewriteRule ^(.*)$ index.php [QSA,L]
+</IfModule>
