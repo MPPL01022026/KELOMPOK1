@@ -1,4 +1,4 @@
-//rana shofa-dasboard//
+//rana shofa-dasboard controler//
 <?php
 namespace App\Controllers;
 
