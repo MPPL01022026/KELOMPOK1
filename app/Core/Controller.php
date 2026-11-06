@@ -1,3 +1,4 @@
+/*Arya:autentikasi (multirole admin-kasir)*/
 <?php
 namespace App\Core;
 
