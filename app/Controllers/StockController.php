@@ -1,4 +1,9 @@
 <?php
+/**
+ * Controller Manajemen Stok (Barang Masuk & Penyesuaian Fisik)
+ * Modul: Inventory System - Yunda Fashion
+ * Developer: Salsabila (230504097)
+ */
 namespace App\Controllers;
 
 use App\Core\Controller;

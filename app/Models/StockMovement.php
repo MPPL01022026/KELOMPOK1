@@ -1,4 +1,9 @@
 <?php
+/**
+ * Model Pergerakan Mutasi Stok (Stock Movements)
+ * Modul: Inventory System - Yunda Fashion
+ * Developer: Salsabila (230504097)
+ */
 namespace App\Models;
 
 use App\Core\Model;
