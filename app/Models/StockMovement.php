@@ -1,8 +1,9 @@
 <?php
 /**
  * Model Pergerakan Mutasi Stok (Stock Movements)
- * Modul: Inventory System - Yunda Fashion
+ * Modul: Inventory System - Yunda Fashion (Sprint 4)
  * Developer: Salsabila (230504097)
+ * Fitur: Pencatatan Histori Restock, Penjualan, & Penyesuaian Stok
  */
 namespace App\Models;
 

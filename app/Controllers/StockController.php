@@ -1,8 +1,9 @@
 <?php
 /**
  * Controller Manajemen Stok (Barang Masuk & Penyesuaian Fisik)
- * Modul: Inventory System - Yunda Fashion
+ * Modul: Inventory System - Yunda Fashion (Sprint 4)
  * Developer: Salsabila (230504097)
+ * Fitur: Pencatatan Barang Masuk (Restock) & Penyesuaian Stok Fisik (Adjustment)
  */
 namespace App\Controllers;
 
