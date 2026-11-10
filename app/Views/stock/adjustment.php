@@ -1,4 +1,10 @@
-<?php use App\Config\App; ?>
+<?php
+/**
+ * View Penyesuaian Stok Fisik (Stock Adjustment)
+ * Developer: Salsabila (230504097)
+ */
+use App\Config\App;
+?>
 
 <div class="container-fluid px-0">
     <div class="row align-items-center mb-4">
