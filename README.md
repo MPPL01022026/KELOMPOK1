@@ -14,7 +14,7 @@
     <img src="https://img.shields.io/badge/Design-Canva-00C4CC?style=for-the-badge&logo=canva&logoColor=white" alt="Canva Design" />
   </a>
   <a href="https://kjpskfoi0jra.jp.larksuite.com/base/USifbL6kLaaVzOsK3InjP4yjpUh?from=from_copylink" target="_blank">
-    <img src="https://img.shields.io/badge/Project%20Management-Lark-00A5FF?style=for-the-badge&logo=lark&logoColor=white" alt="Lark Project Management" />
+    <img src="https://kjpskfoi0jra.jp.larksuite.com/base/USifbL6kLaaVzOsK3InjP4yjpUh?from=from_copylink"Lark Project Management" />
   </a>
 </p>
 
