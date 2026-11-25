@@ -9,6 +9,14 @@
   <img src="https://img.shields.io/badge/Methodology-Agile%20Scrum-success?style=for-the-badge&logo=scrumalliance&logoColor=white" alt="Agile Scrum" />
   <img src="https://img.shields.io/badge/Status-Active%20Development-orange?style=for-the-badge" alt="Status" />
 </p>
+<p align="center">
+  <a href="LINK_CANVA_KAMU" target="_blank">
+    <img src="https://img.shields.io/badge/Design-Canva-00C4CC?style=for-the-badge&logo=canva&logoColor=white" alt="Canva Design" />
+  </a>
+  <a href="LINK_LARK_KAMU" target="_blank">
+    <img src="https://img.shields.io/badge/Project%20Management-Lark-00A5FF?style=for-the-badge&logo=lark&logoColor=white" alt="Lark Project Management" />
+  </a>
+</p>
 
 ---
 
